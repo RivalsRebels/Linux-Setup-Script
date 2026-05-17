@@ -17,5 +17,5 @@ bash <(
 # Manual
 Manually install and run the script:
 1. Download the latest script from the Release tab.
-2. `chmod +x nitroxsetup.x.x.x.x.x.sh` the script so it has executable permissions.
-3. Run the script via `./nitroxsetup.x.x.x.x.x.sh` in your terminal.
+2. `chmod +x nitroxsetup.sh` the script so it has executable permissions.
+3. Run the script via `./nitroxsetup.sh` in your terminal.
