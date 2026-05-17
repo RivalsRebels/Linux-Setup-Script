@@ -128,7 +128,7 @@ nitrox_zip_file_path="${nitrox_temp_install_path}${nitrox_zip_file_name}"
 
 
 # Program
-echo "----------------Nitrox-Setup-Script-1.8.1.0.0-----------------"
+echo "----------------Nitrox-Setup-Script-1.8.1.0-----------------"
 mkdir "${nitrox_temp_install_path}"
 dotnet_install
 nitrox_install
