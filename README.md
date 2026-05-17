@@ -6,7 +6,7 @@ Install and run the script via a single command:
 ```
 bash <(
   curl -fsSL "$(
-    curl -fsSL https://api.github.com/repos/RivalsRebels/Nitrox-Setup-Script/releases/latest \
+    curl -fsSL https://api.github.com/repos/SubnauticaNitrox/Linux-Setup-Script/releases/latest \
     | grep 'browser_download_url.*\.sh' \
     | cut -d '"' -f 4 \
     | head -n 1
