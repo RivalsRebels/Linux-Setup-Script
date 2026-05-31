@@ -74,7 +74,7 @@ Options:
      -dotnet-path <path>
          Select the install location of Dotnet.
          Default: $dotnet_install_path
-         NOTE: If you execute this script again without this arg pointing to the new selected dotnet path, the script will not find it and install dotnet in it default path.
+         NOTE: If you execute this script again without this arg pointing to the new selected dotnet path, the script will not find it and it will install dotnet in the default path.
      --no-desktop
          Skip desktop shortcut creation
      -h, --help
@@ -149,6 +149,9 @@ get_dotnet_binary() {
     if [ -f "$HOME/.dotnet/dotnet" ]; then
         echo "$HOME/.dotnet/dotnet"
         return 0
+    elif [ -f "$dotnet_install_path/dotnet" ]; then
+        echo "$dotnet_install_path/dotnet"
+        return 0    
     fi    
     echo "dotnet"
 }
