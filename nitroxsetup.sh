@@ -11,6 +11,7 @@ nitrox_install_path="$HOME/.Nitrox/"
 nitrox_temp_install_path="/tmp/Nitrox Setup Files $(date +%s)/"
 nitrox_desktop_file="$HOME/Desktop/NitroxLauncher.desktop"
 
+
 # Functions
 prompt_confirm() {
   while true; do
@@ -25,38 +26,59 @@ prompt_confirm() {
 script_handle_args() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
-           -nitrox-dir)
-               if [[ $# -lt 2 ]]; then
-                    echo "Error: -nitrox-dir cannot be empty!"
-                    exit 1
-               fi
-               nitrox_install_path="$2"
-               shift 2
-               ;;
-            -dotnet-dir)
+           -nitrox-path)
             if [[ $# -lt 2 ]]; then
-                    echo "Error: -dotnet-dir cannot be empty!"
-                    exit 1
-               fi
+                echo "Error: -nitrox-path cannot be empty!"
+                exit 1
+            fi
+            nitrox_install_path="$2"
+            shift 2
+            ;;
+            -dotnet-path)
+            if [[ $# -lt 2 ]]; then
+                echo "Error: -dotnet-path cannot be empty!"
+                exit 1
+            fi
                dotnet_install_path="$2"
                shift 2
-               ;;   
+            ;;   
             --no-desktop)
             no_desktop=true
             shift
             ;;
             -h|--help)
-            echo "help here"
+            script_show_help
             exit 0
             ;;
             *)
             echo "Unknown argument: $1"
             echo
-            echo "help here"
+            script_show_help
             exit 1
             ;;
         esac           
    done
+}
+
+script_show_help() {
+cat <<EOF 
+    Nitrox Setup Script 1.8.1.0
+
+Usage:
+     $0 [OPTIONS]
+
+Options:
+     -nitrox-path <path>
+         Select the install location of Nitrox.
+         Default: $nitrox_install_path
+     -dotnet-path <path>
+         Select the install location of Dotnet.
+         Default: $dotnet_install_path
+     --no-desktop
+         Skip desktop shortcut creation
+     -h, --help
+         Show this message.
+EOF
 }
 
 nitrox_ensure_execute_flag() {
@@ -166,7 +188,7 @@ nitrox_zip_file_path="${nitrox_temp_install_path}${nitrox_zip_file_name}"
 
 # Program
 program() {
-script_handle_args "$@"    
+script_handle_args "$@" 
 echo "----------------Nitrox-Setup-Script-1.8.1.0-----------------"
 mkdir "${nitrox_temp_install_path}"
 dotnet_install
