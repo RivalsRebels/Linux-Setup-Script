@@ -22,6 +22,43 @@ prompt_confirm() {
   done  
 }
 
+script_handle_args() {
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+           -nitrox-dir)
+               if [[ $# -lt 2 ]]; then
+                    echo "Error: -nitrox-dir cannot be empty!"
+                    exit 1
+               fi
+               nitrox_install_path="$2"
+               shift 2
+               ;;
+            -dotnet-dir)
+            if [[ $# -lt 2 ]]; then
+                    echo "Error: -dotnet-dir cannot be empty!"
+                    exit 1
+               fi
+               dotnet_install_path="$2"
+               shift 2
+               ;;   
+            --no-desktop)
+            no_desktop=true
+            shift
+            ;;
+            -h|--help)
+            echo "help here"
+            exit 0
+            ;;
+            *)
+            echo "Unknown argument: $1"
+            echo
+            echo "help here"
+            exit 1
+            ;;
+        esac           
+   done
+}
+
 nitrox_ensure_execute_flag() {
     check_target_file_path="${nitrox_install_path}$1"
     [ -f "${check_target_file_path}" ] || { echo "Nitrox installation failed. Missing file: '${check_target_file_path}'"; return 1; }
@@ -128,12 +165,19 @@ nitrox_zip_file_path="${nitrox_temp_install_path}${nitrox_zip_file_name}"
 
 
 # Program
+program() {
+script_handle_args "$@"    
 echo "----------------Nitrox-Setup-Script-1.8.1.0-----------------"
 mkdir "${nitrox_temp_install_path}"
 dotnet_install
 nitrox_install
-nitrox_add_desktop_file
+if [[ "${no_desktop:-false}" != true ]]; then
+    nitrox_add_desktop_file
+fi
 echo "Done."
+}
+
+program "$@"
 
 # Helpful info
 dotnet_binary=$(get_dotnet_binary)
