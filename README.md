@@ -17,7 +17,7 @@ Manually install and run the script:
 
 # Script Arguments
 Add arguments to your script in order to customise it:
-
+```sh
 Usage:
      nitroxsetup.sh [OPTIONS]
 
@@ -33,3 +33,4 @@ Options:
          Skip desktop shortcut creation.
      -h, --help
          Show this message.
+```
