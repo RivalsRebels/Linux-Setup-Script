@@ -74,6 +74,7 @@ Options:
      -dotnet-path <path>
          Select the install location of Dotnet.
          Default: $dotnet_install_path
+         NOTE: If you execute this script again without this arg pointing to the new selected dotnet path, the script will not find it and install dotnet in it default path.
      --no-desktop
          Skip desktop shortcut creation
      -h, --help
