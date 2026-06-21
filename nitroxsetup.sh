@@ -25,6 +25,7 @@ BLUE="$(tput setaf 4)"
 SKY_BLUE="$(tput setaf 6)"
 RESET="$(tput sgr0)"
 
+# Functions
 prompt_confirm() {
   while true; do
     read -r -n 1 -p "${1:-Continue?} [${GREEN}y${RESET}/${RED}N${RESET}]: " REPLY
